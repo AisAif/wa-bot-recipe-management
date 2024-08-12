@@ -1,0 +1,140 @@
+version: '3.1'
+
+intents:
+- deny
+- greet
+- request_login
+- request_create_book
+- request_find_book
+
+forms:
+  login_form:
+    required_slots:
+    - username
+    - password
+  create_book_form:
+    required_slots:
+    - title
+    - author
+    - summary
+    - total_page
+    - year
+  find_book_form:
+    required_slots:
+    - title
+
+slots:
+  username:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: login_form
+        requested_slot: username
+  password:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: login_form
+        requested_slot: password
+  name:
+    type: text
+    mappings:
+    - type: custom
+  access_token:
+    type: text
+    mappings:
+    - type: custom
+  logged_in:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: custom
+  title:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: create_book_form
+        requested_slot: title
+      - active_loop: find_book_form
+        requested_slot: title
+  author:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: create_book_form
+        requested_slot: author
+  summary:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: create_book_form
+        requested_slot: summary
+  total_page:
+    type: float
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: create_book_form
+        requested_slot: total_page
+  year:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: create_book_form
+        requested_slot: year
+
+actions:
+- utter_help
+- action_login
+- action_create_book
+- action_find_book
+
+responses:
+  utter_help:
+  - condition:
+    - type: custom
+      name: logged_in
+      value: true
+    text: |-
+      Halo {name}... 👋😄 
+       Kamu bisa memberi perintah apa saja di bot ini? 
+       1. Menyimpan informasi buku 
+       2. Mencari buku 
+       3. Cek informasi detail buku 
+       4. Mengubah informasi buku 
+       5. Menghapus informasi buku 
+       Silahkan tanyakan sesuai dengan perintah yang kamu inginkan.
+  - text: |-
+      Halo...👋😄 
+       Kamu bisa memberi perintah apa saja di bot ini? 
+       1. Menyimpan informasi buku 
+       2. Mencari buku 
+       3. Cek informasi detail buku 
+       4. Mengubah informasi buku 
+       5. Menghapus informasi buku 
+       Silahkan tanyakan sesuai dengan perintah yang kamu inginkan. 
+       Sebelum itu, kamu harus login menggunakan username dan password terlebih dahulu dengan cara menghubungiku secara langsung agar data kredensialmu tetap aman
+  utter_ask_username:
+  - text: Apa username anda?
+  utter_ask_password:
+  - text: Apa password anda?
+  utter_ask_title:
+  - text: Apa judul buku?
+  utter_ask_author:
+  - text: Siapa penulis buku?
+  utter_ask_summary:
+  - text: Bagaimana ringkasan buku?
+  utter_ask_total_page:
+  - text: Berapa total halaman buku?
+  utter_ask_year:
+  - text: Tahun berapa buku terbit?
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

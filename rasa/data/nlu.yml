@@ -1,0 +1,51 @@
+version: "3.1"
+
+nlu:
+
+- intent: greet
+  examples: |
+    - hai
+    - halo
+    - halo di sana
+    - hai kawan
+    - konnichiwa
+    - hei
+    - woi
+    - bot
+    - assalamualaikum
+    - assalamu'alaikum
+    - warrohmatulloh
+    - salam
+    - test
+- intent: deny
+  examples: |
+    - tidak
+    - bukan
+    - jangan
+    - saya tidak berpikir begitu
+    - tidak yakin
+    - jangan pernah
+- intent: request_login
+  examples: |
+    - saya ingin masuk
+    - bagamana cara login
+    - saya mencoba untuk masuk
+    - tolong saya ingin masuk
+    - saya membutuhkan login
+    - saya ingin login
+- intent: request_create_book
+  examples: |
+    - saya ingin membuat buku
+    - saya mau menambahkan buku
+    - tolong buat buku
+    - tambah buku
+    - masukkan buku
+    - isi informasi buku
+- intent: request_find_book
+  examples: |
+    - saya ingin mencari buku
+    - tolong cari buku
+    - mendapatkan informasi buku
+    - cari informasi buku
+    - mengetahui informasi buku
+    - mau buku

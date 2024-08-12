@@ -1,0 +1,56 @@
+version: "3.1"
+
+rules:
+
+- rule: Ask for help
+  steps:
+  - intent: greet
+  - action: utter_help
+
+- rule: Activate login form
+  steps:
+  - intent: request_login
+  - action: login_form
+  - active_loop: login_form
+
+- rule: Submit login form
+  condition:
+  - active_loop: login_form
+  steps:
+  - action: login_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_login
+
+- rule: Activate create book form
+  steps:
+  - intent: request_create_book
+  - action: create_book_form
+  - active_loop: create_book_form
+
+- rule: Submit create book form
+  condition:
+  - active_loop: create_book_form
+  steps:
+  - action: create_book_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_create_book
+
+- rule: Activate find book form
+  steps:
+  - intent: request_find_book
+  - action: find_book_form
+  - active_loop: find_book_form
+
+- rule: Submit find book form
+  condition:
+  - active_loop: find_book_form
+  steps:
+  - action: find_book_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_find_book

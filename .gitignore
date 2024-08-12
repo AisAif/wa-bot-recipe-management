@@ -1,0 +1,12 @@
+**/*/*.env
+
+rasa/models
+rasa/actions/__pycache__
+rasa/.venv
+rasa/.rasa
+rasa/story_graph.dot
+
+wweb/.wwebjs_cache
+wweb/auth-data
+wweb/dist
+wweb/node_modules
